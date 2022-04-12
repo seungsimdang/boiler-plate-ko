@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 5000;
 
+const { auth } = require('./middleware/auth');
 const { User } = require('./models/User');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -15,6 +16,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 const mongoose = require('mongoose');
+const { Router } = require('express');
+const { json } = require('express/lib/response');
 mongoose
   .connect(config.mongoURI, {
     //userNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFineAndModify: false
@@ -26,7 +29,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.post('/register', (req, res) => {
+app.post('/api/users/register', (req, res) => {
   // 회원 가입 할때 필요한 정보들을 client에서 가져오면
   // 그것들을 데이터 베이스에 넣어준다.
   const user = new User(req.body);
@@ -68,6 +71,22 @@ app.post('/login', (req, res) => {
           .json({ loginSuccess: true, userId: user._id });
       });
     });
+  });
+});
+
+//role이 1이면 admin, role이 2이면 특정 부서 admin
+//role이 0이면 일반 유저, role이 0이 아니면 관리자
+app.get('/api/users/auth', auth, (req, res) => {
+  //여기까지 미들웨어를 통과해 왔다는 얘기는 Authentication이 True라는 말.
+  res.status(200).json({
+    _id: req.user._id,
+    isAdmin: req.user.role === 0 ? false : true,
+    isAuth: true,
+    email: req.user.email,
+    name: req.user.name,
+    lastname: req.user.lastname,
+    role: req.user.role,
+    image: req.user.image,
   });
 });
 
