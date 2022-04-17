@@ -7,7 +7,7 @@ const { User } = require('./models/User');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
-const config = require('./config/key');
+const config = require('./key');
 
 //application/x-www-form-urlencoded의 data
 app.use(bodyParser.urlencoded({ extended: true }));
