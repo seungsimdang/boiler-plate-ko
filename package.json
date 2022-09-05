@@ -5,7 +5,7 @@
   "main": "./server/index.js",
   "scripts": {
     "start": "node index.js",
-    "backend": "nodemon ./server/index.js",
+    "backend": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "SeungHyunLee",
@@ -16,6 +16,7 @@
     "cookie-parser": "^1.4.6",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
+    "key": "^0.1.11",
     "mongoose": "^6.2.8"
   },
   "devDependencies": {
