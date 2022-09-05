@@ -2,10 +2,10 @@
   "name": "boiler-plate",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./server/index.js",
   "scripts": {
     "start": "node index.js",
-    "backend": "nodemon index.js",
+    "backend": "nodemon ./server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "SeungHyunLee",
@@ -19,6 +19,6 @@
     "mongoose": "^6.2.8"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.19"
   }
 }
